@@ -54,7 +54,7 @@ let productsData = [
 ]
 
 
-let money = 10000000 // for testing delete later 
+let money = 100000000 // for testing delete later 
 
 const productContainer = document.querySelector('.products-container')
 
@@ -106,7 +106,7 @@ async function buyProduct(e) {
         }
       });
 
-      if (!quantity.isConfirmed) {
+      if (quantity.isConfirmed) {
         return 0;
       }
       let officialQuantity = Math.round(quantity)
@@ -167,9 +167,9 @@ async function buyProduct(e) {
 // for testing delete later
 console.log('იხმარეთ ცვლადი "money=(თანხის რაოდენობა)" რათა გაზარდოთ თანხა. Default 100$ ')
 
-//function BuyProduct(product, sum, quantity) {
-  //  cef.emit("pwd:buyitem", product.name, sum, quantity) 
+function BuyProduct(product, sum, quantity) {
+    cef.emit("pwd:buyitem", product.name, sum, quantity) 
     // აქ მოვა პროდუქტის სახელი (product.name),
     // ჯამში რამდენი გადაიხადა (sum),
     // და რამდენი იყიდა (quantity)
-//}
+}
