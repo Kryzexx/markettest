@@ -3,7 +3,7 @@
     src: url('assets/fonts/archyedt-bold.otf') format('opentype');
     font-weight: normal;
     font-style: normal;
-  }
+}
 
 *, *::before, *::after {
     padding: 0;
@@ -22,13 +22,14 @@ body {
 
 .main-container {
     max-width: 1506px;
-    max-height: 800px;
-    height: 90vh;
+    max-height: 650px;
+    height: 650px;
     width: 100%;
     background-color: #E5E5E5;
     margin: auto;
     flex-shrink: 0;
     display: flex;
+    position: relative;
 }
 
 .greencontainer{
@@ -119,14 +120,15 @@ body {
 
 .products-container {
     display: flex;
-    width: 60%;
-    height: 95%;
-    border: 2px solid black;
+    width: fit-content;
+    height: 80%;
     flex-wrap: wrap;
     overflow: auto;
     padding-left: 57px;
     padding-top: 47px;
     gap: 27px;
+    position: relative;
+    top: 50px;
 }
 
 .product {
@@ -203,4 +205,23 @@ body {
 .add-product img {
     width: 20px;
     height: 20px;
+}
+
+@media only screen and (max-width: 1470px) {
+    .main-container {
+        width: 85%;
+    }
+}
+
+@media only screen and (max-width: 1440px) {
+    .main-container {
+        width: 70%;
+    }
+}
+
+@media only screen and (max-width: 1391px) {
+    .products-container {
+        justify-content: center;
+        align-items: center;
+    }
 }
