@@ -106,6 +106,9 @@ async function buyProduct(e) {
         }
       });
 
+      if (!quantity.isConfirmed) {
+        return 0;
+      }
       let officialQuantity = Math.round(quantity)
 
       if(officialQuantity && officialQuantity >= 1 || typeof(officialQuantity) == Number) {
@@ -165,7 +168,7 @@ async function buyProduct(e) {
 console.log('იხმარეთ ცვლადი "money=(თანხის რაოდენობა)" რათა გაზარდოთ თანხა. Default 100$ ')
 
 //function BuyProduct(product, sum, quantity) {
-   // cef.emit("pwd:buyitem", product.name, sum, quantity) 
+  //  cef.emit("pwd:buyitem", product.name, sum, quantity) 
     // აქ მოვა პროდუქტის სახელი (product.name),
     // ჯამში რამდენი გადაიხადა (sum),
     // და რამდენი იყიდა (quantity)
