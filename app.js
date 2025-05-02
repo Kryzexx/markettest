@@ -54,7 +54,7 @@ let productsData = [
 ]
 
 
-let money = 100 // for testing delete later 
+let money = 100000000 // for testing delete later 
 
 const productContainer = document.querySelector('.products-container')
 
@@ -147,6 +147,8 @@ async function buyProduct(e) {
                 icon: "success",
                 scrollbarPadding: false,
               });
+              BuyProduct(product, sum, officialQuantity)
+              //cef.emit("pwd:buyitem",GasagzavniData)
             }
             else if(result.isConfirmed && money < sum) {
                 Swal.fire({
@@ -161,3 +163,10 @@ async function buyProduct(e) {
 
 // for testing delete later
 console.log('იხმარეთ ცვლადი "money=(თანხის რაოდენობა)" რათა გაზარდოთ თანხა. Default 100$ ')
+
+//function BuyProduct(product, sum, quantity) {
+   // cef.emit("pwd:buyitem", product.name, sum, quantity) 
+    // აქ მოვა პროდუქტის სახელი (product.name),
+    // ჯამში რამდენი გადაიხადა (sum),
+    // და რამდენი იყიდა (quantity)
+//}
