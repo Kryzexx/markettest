@@ -117,7 +117,7 @@ async function buyProduct(e) {
             return Swal.fire({
                 icon: "error",
                 title: "შეცდომა",
-                text: "პროდუქტების რაოდენობა არ შეიძლება იყოს 7 ზე მეტი",
+                text: "პროდუქტების რაოდენობა არ შეიძლება იყოს 50 ზე მეტი",
                 scrollbarPadding: false,
               });
             }
