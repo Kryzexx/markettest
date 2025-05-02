@@ -54,7 +54,7 @@ let productsData = [
 ]
 
 
-let money = 100000000 // for testing delete later 
+let money = 10000000 // for testing delete later 
 
 const productContainer = document.querySelector('.products-container')
 
