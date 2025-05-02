@@ -20,6 +20,10 @@ body {
     align-items: center;
 }
 
+body.swal2-height-auto {
+    height: 100vh !important;
+}
+
 .main-container {
     max-width: 1506px;
     max-height: 650px;
