@@ -50,9 +50,9 @@ let productsData = [
         image: "assets/images/meds.png",
         price: 400,
     },
+    
 ]
 
-console.log('იხმარეთ ცვლადი "money=(თანხის რაოდენობა)" რათა გაზარდოთ თანხა. Default 100$ ')
 
 let money = 100 // for testing delete later 
 
@@ -82,7 +82,7 @@ productsData.forEach((e, index) => {
                     <span>${e.price}</span>
                 </div>
             </div>
-            <div class="add-product" onclick="test(event)" data-id="${e.id}">
+            <div class="add-product" onclick="buyProduct(event)" data-id="${e.id}">
                 <img src="assets/images/add.png" alt="Add">
             </div>
         </div>
@@ -90,35 +90,74 @@ productsData.forEach((e, index) => {
     productContainer.appendChild(productDiv)
 });
 
-function test(e) {
+async function buyProduct(e) {
     const id = parseInt(e.currentTarget.getAttribute("data-id"))
     const product = productsData.find(e => e.id == id)
-    console.log(product)
-    Swal.fire({
-        title: "დასტური",
-        text: `ნამდვილად გსურთ შეიძინოთ ${product.name}, ${product.price}$-ად?`,
-        icon: "warning",
+
+     const { value: quantity } = await Swal.fire({
+        title: "ჩაწერეთ პროდუქტის რაოდენობა",
+        input: "number",
+        inputLabel: "პროდუქტის რაოდენობა",
         showCancelButton: true,
-        confirmButtonColor: "#3085d6",
-        cancelButtonColor: "#d33",
-        confirmButtonText: "დიახ",
-        scrollbarPadding: false,
-      }).then((result) => {
-        if (result.isConfirmed && money >= product.price) {
-          Swal.fire({
-            title: "Done",
-            text: `თქვენ შეიძინეთ ${product.name}, ${product.price}$-ად`,
-            icon: "success",
-            scrollbarPadding: false,
-          });
+        inputValidator: (value) => {
+          if (!value) {
+            return "გთხოვთ ჩაწეროთ პროდუქტის რაოდენობა";
+          }
         }
-        else if(result.isConfirmed && money < product.price) {
-            Swal.fire({
+      });
+
+      let officialQuantity = Math.round(quantity)
+
+      if(officialQuantity && officialQuantity >= 1 || typeof(officialQuantity) == Number) {
+
+        if(officialQuantity > 50) {
+            return Swal.fire({
                 icon: "error",
                 title: "შეცდომა",
-                text: "თქვენ არ გაქვთ საკმარისი თანხა",
+                text: "პროდუქტების რაოდენობა არ შეიძლება იყოს 7 ზე მეტი",
+                scrollbarPadding: false,
+              });
+            }
+        }
+
+        let sum = Math.round(officialQuantity * product.price)
+
+        if(officialQuantity <= 0) {
+            return Swal.fire({
+                icon: "error",
+                title: "შეცდომა",
+                text: "პროდუქტების რაოდენობა არ შეიძლება იყოს 0 ან მასზე ნაკლები",
                 scrollbarPadding: false,
               });
         }
-      });
+        Swal.fire({
+            title: "დასტური",
+            text: `ნამდვილად გსურთ შეიძინოთ ${officialQuantity} ცალი ${product.name}, ${sum}$-ად?`,
+            icon: "warning",
+            showCancelButton: true,
+            confirmButtonColor: "#3085d6",
+            cancelButtonColor: "#d33",
+            confirmButtonText: "დიახ",
+            scrollbarPadding: false,
+          }).then((result) => {
+            if (result.isConfirmed && money >= sum) {
+              Swal.fire({
+                title: "Done",
+                text: `თქვენ შეიძინეთ ${officialQuantity} ცალი ${product.name}, ${sum}$-ად`,
+                icon: "success",
+                scrollbarPadding: false,
+              });
+            }
+            else if(result.isConfirmed && money < sum) {
+                Swal.fire({
+                    icon: "error",
+                    title: "შეცდომა",
+                    text: "თქვენ არ გაქვთ საკმარისი თანხა",
+                    scrollbarPadding: false,
+                  });
+                }
+            });
 }
+
+// for testing delete later
+console.log('იხმარეთ ცვლადი "money=(თანხის რაოდენობა)" რათა გაზარდოთ თანხა. Default 100$ ')
