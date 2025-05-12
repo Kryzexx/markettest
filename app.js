@@ -114,8 +114,8 @@ async function buyProduct(e) {
             confirmButtonText: "დიახ",
             scrollbarPadding: false,
           }).then((result) => {
-              cef.on("pwd:getcash", cash) {
-              if (result.isConfirmed && cash >= sum) {
+            cef.on("pwd:getcash", (cash) => {
+             if (result.isConfirmed && cash >= sum) {
               Swal.fire({
                 title: "Done",
                 text: `თქვენ შეიძინეთ ${officialQuantity} ცალი ${product.name}, ${sum}$-ად`,
@@ -134,9 +134,8 @@ async function buyProduct(e) {
                   });
                 }
             });
-            }
-}
-
+        })
+    }
 function BuyProduct(product, sum, quantity) {
     cef.emit("pwd:buyitem", product.name, sum, quantity) 
     // აქ მოვა პროდუქტის სახელი (product.name),
