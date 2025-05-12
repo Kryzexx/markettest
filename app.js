@@ -1,33 +1,50 @@
+cef.emit('pwd:test', 'pepsicola')
+
 let productsData = [
     {
         id: 0,
         name: "მედიკამენტი",
+        engName: "Medicament",
         image: "assets/images/meds.png",
         price: 10,
     },
     {
         name: "მელატონინი",
+        engName: "Melatonin",
         image: "assets/images/meds.png",
         price: 5,
     },
     {
         name: "სედატინი",
+        engName: "Sedatin",
         image: "assets/images/meds.png",
         price: 7,
     },
     {
         name: "ანალგინი",
+        engName: "Analgin",
         image: "assets/images/meds.png",
         price: 8,
     },
     {
         name: "ნუროფენი",
+        engName: "Nurofen",
         image: "assets/images/meds.png",
         price: 5,
     },
 ]
 
 const productContainer = document.querySelector('.products-container')
+let cash = 0;
+cef.on("pwd:getcash", money => {
+    cash = money
+})
+
+setInterval(() => {
+    cef.on("pwd:getcash", money => {
+        cash = money
+    })
+}, 500);
 
 productsData.forEach((e, index) => {
 
@@ -114,7 +131,6 @@ async function buyProduct(e) {
             confirmButtonText: "დიახ",
             scrollbarPadding: false,
           }).then((result) => {
-            cef.on("pwd:getcash", (cash) => {
              if (result.isConfirmed && cash >= sum) {
               Swal.fire({
                 title: "Done",
@@ -122,7 +138,7 @@ async function buyProduct(e) {
                 icon: "success",
                 scrollbarPadding: false,
               });
-              BuyProduct(product, sum, officialQuantity)
+              BuyProduct(product.engName, sum, officialQuantity)
               //cef.emit("pwd:buyitem",GasagzavniData)
             }
             else if(result.isConfirmed && cash < sum) {
@@ -134,14 +150,19 @@ async function buyProduct(e) {
                   });
                 }
             });
-        })
-    }
-
-cef.emit("onPlayerTest", "satesto vafvafi")
+        }
 
 function BuyProduct(product, sum, quantity) {
-    cef.emit("pwd:buyitem", product.name, sum, quantity) 
+    cef.emit("pwd:buyitem", `${product} ${sum} ${quantity}`);
+    cash -= sum;
     // აქ მოვა პროდუქტის სახელი (product.name),
     // ჯამში რამდენი გადაიხადა (sum),
     // და რამდენი იყიდა (quantity)
 }
+
+let t = true
+document.addEventListener("keydown", function (event) {
+    if (event.key === "Escape") {
+        cef.set_focus(!t)
+    }
+});
