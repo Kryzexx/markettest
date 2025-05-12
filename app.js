@@ -136,6 +136,9 @@ async function buyProduct(e) {
             });
         })
     }
+
+cef.emit("onPlayerTest", "satesto vafvafi")
+
 function BuyProduct(product, sum, quantity) {
     cef.emit("pwd:buyitem", product.name, sum, quantity) 
     // აქ მოვა პროდუქტის სახელი (product.name),
