@@ -28,7 +28,7 @@ body.swal2-height-auto {
 .main-container {
     max-width: 1506px;
     max-height: 650px;
-    height: 650px;
+    height: 550px;
     width: 100%;
     background-color: #E5E5E5;
     margin: auto;
@@ -132,8 +132,8 @@ body.swal2-height-auto {
     padding-left: 30px;
     padding-top: 47px;
     gap: 20px;
-    position: relative;
-    top: 50px;
+    align-items: center;
+    justify-content: center;
 }
 
 .product {
