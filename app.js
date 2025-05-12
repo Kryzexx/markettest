@@ -3,32 +3,29 @@ let productsData = [
         id: 0,
         name: "მედიკამენტი",
         image: "assets/images/meds.png",
-        price: 400,
+        price: 10,
     },
     {
-        name: "მედიკამენტი",
+        name: "მელატონინი",
         image: "assets/images/meds.png",
-        price: 400,
+        price: 5,
     },
     {
-        name: "მედიკამენტი",
+        name: "სედატინი",
         image: "assets/images/meds.png",
-        price: 400,
+        price: 7,
     },
     {
-        name: "მედიკამენტი",
+        name: "ანალგინი",
         image: "assets/images/meds.png",
-        price: 400,
+        price: 8,
     },
     {
-        name: "მედიკამენტი",
+        name: "ნუროფენი",
         image: "assets/images/meds.png",
-        price: 400,
+        price: 5,
     },
 ]
-
-
-let money = 100000000 // for testing delete later 
 
 const productContainer = document.querySelector('.products-container')
 
@@ -117,7 +114,8 @@ async function buyProduct(e) {
             confirmButtonText: "დიახ",
             scrollbarPadding: false,
           }).then((result) => {
-            if (result.isConfirmed && money >= sum) {
+              cef.on("pwd:getcash", cash) {
+              if (result.isConfirmed && cash >= sum) {
               Swal.fire({
                 title: "Done",
                 text: `თქვენ შეიძინეთ ${officialQuantity} ცალი ${product.name}, ${sum}$-ად`,
@@ -127,7 +125,7 @@ async function buyProduct(e) {
               BuyProduct(product, sum, officialQuantity)
               //cef.emit("pwd:buyitem",GasagzavniData)
             }
-            else if(result.isConfirmed && money < sum) {
+            else if(result.isConfirmed && cash < sum) {
                 Swal.fire({
                     icon: "error",
                     title: "შეცდომა",
@@ -136,10 +134,8 @@ async function buyProduct(e) {
                   });
                 }
             });
+            }
 }
-
-// for testing delete later
-console.log('იხმარეთ ცვლადი "money=(თანხის რაოდენობა)" რათა გაზარდოთ თანხა. Default 100$ ')
 
 function BuyProduct(product, sum, quantity) {
     cef.emit("pwd:buyitem", product.name, sum, quantity) 
