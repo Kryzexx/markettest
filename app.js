@@ -25,32 +25,6 @@ let productsData = [
         image: "assets/images/meds.png",
         price: 400,
     },
-    {
-        name: "მედიკამენტი",
-        image: "assets/images/meds.png",
-        price: 400,
-    },
-    {
-        name: "მედიკამენტი",
-        image: "assets/images/meds.png",
-        price: 400,
-    },
-    {
-        name: "მედიკამენტი",
-        image: "assets/images/meds.png",
-        price: 400,
-    },
-    {
-        name: "მედიკამენტი",
-        image: "assets/images/meds.png",
-        price: 400,
-    },
-    {
-        name: "მედიკამენტი",
-        image: "assets/images/meds.png",
-        price: 400,
-    },
-    
 ]
 
 
