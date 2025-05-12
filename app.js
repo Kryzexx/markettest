@@ -1,5 +1,3 @@
-cef.emit('pwd:test', 'pepsicola')
-
 let productsData = [
     {
         id: 0,
